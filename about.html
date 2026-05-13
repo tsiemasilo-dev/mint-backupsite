@@ -343,12 +343,10 @@
                     <span class="text-[var(--mint-primary-purple)] font-bold text-[11px] uppercase tracking-wide mb-4 block">Our Leadership</span>
                     <h2 class="text-4xl md:text-7xl font-light tracking-tight uppercase">The Architects</h2>
                 </div>
-        
+
                 <div class="space-y-16 md:space-y-32">
                     <div class="architect-row flex flex-col lg:flex-row items-center gap-10 md:gap-24">
-                        <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden 
-                                    after:content-[''] after:absolute after:inset-0 
-                                    after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
+                        <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
                             <img src="/images/LonwaboT.avif" alt="Lonwabo Damane" loading="lazy" class="director-portrait w-full h-full object-cover">
                         </div>
                         <div class="w-full lg:w-3/5">
@@ -359,19 +357,41 @@
                             </p>
                         </div>
                     </div>
-        
+
                     <div class="architect-row flex flex-col lg:flex-row items-center gap-10 md:gap-24">
-                        <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden 
-                                    after:content-[''] after:absolute after:inset-0 
-                                    after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
+                        <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
                             <img src="/images/MihleT.avif" alt="Mihle Matimba" loading="lazy" class="director-portrait w-full h-full object-cover">
                         </div>
                         <div class="w-full lg:w-3/5">
                             <h3 class="text-3xl md:text-5xl font-light mb-2">Mihle Matimba</h3>
                             <p class="text-xs font-bold text-[var(--mint-primary-purple)] uppercase tracking-widest mb-6 md:mb-8">Co-founder & CTO</p>
                             <p class="text-base md:text-lg text-gray-500 font-light leading-relaxed max-w-xl">
-                                Mihle leads the engineering and technological innovation at MINT.
+                                Mihle leads the engineering and technological innovation at MINT.  A strategic technology leader with a track record of architecting scalable systems and driving product innovation. Expert in building and mentoring high-performance engineering teams, modernising technical infrastructure, and aligning software development with business objectives. Passionate about leveraging emerging technologies to solve complex problems, optimise operational efficiency, and deliver robust, secure, and performant digital solutions.
                             </p>
+                        </div>
+                    </div>
+
+                    <div class="architect-row flex flex-col lg:flex-row items-center gap-10 md:gap-24" x-data="{ expanded: false }">
+                        <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
+                            <img src="/images/EletuS.avif" alt="Eletu Silo" loading="lazy" class="director-portrait w-full h-full object-cover">
+                        </div>
+                        <div class="w-full lg:w-3/5">
+                            <h3 class="text-3xl md:text-5xl font-light mb-2">Eletu Silo, CA(SA)</h3>
+                            <p class="text-xs font-bold text-[var(--mint-primary-purple)] uppercase tracking-widest mb-6 md:mb-8">CFO</p>
+                            
+                            <div class="text-base md:text-lg text-gray-500 font-light leading-relaxed max-w-xl">
+                                <p>Eletu Silo is a Chartered Accountant (CA(SA)) with a strong foundation in external audit, financial reporting, and corporate governance. He brings a wealth of professional experience gained through his tenure in the auditing profession, most recently serving as an Audit Manager at EY.</p>
+                                
+                                <div x-show="expanded" x-cloak>
+                                    <p class="mt-4">In this role, Eletu was responsible for managing multiple audit portfolios across a diverse range of industries, including automotive, manufacturing, and financial services. His experience has equipped him with a deep understanding of complex business environments, regulatory requirements, and the practical application of financial reporting standards. He has successfully led audit teams, engaged with senior stakeholders, and ensured the delivery of high-quality, compliant audit outcomes.</p>
+                                </div>
+
+                                <button 
+                                    @click="expanded = !expanded" 
+                                    class="mt-4 text-[var(--mint-primary-purple)] font-medium underline underline-offset-4 hover:opacity-75 transition-opacity"
+                                    x-text="expanded ? 'Read less' : 'Read more'">
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -547,10 +567,10 @@
                     <p>&copy; 2026 MINT. All rights reserved.</p>
                     <div class="flex gap-6">
                         <a href="https://mfxnghmuccevsxwcetej.supabase.co/storage/v1/object/public/Mint%20Assets/Legal%20Docs/Privacy%20Policy%20MINT.pdf" class="hover:text-white transition-colors">Privacy Policy</a>
-                        <a href="https://mfxnghmuccevsxwcetej.supabase.co/storage/v1/object/public/Mint%20Assets/Legal%20Docs/MINT%20WEBSITE%20TERMS%20AND%20CONDITIONS.pdf" class="hover:text-white transition-colors">Terms of Service</a>
-                        <a href="https://mfxnghmuccevsxwcetej.supabase.co/storage/v1/object/public/Mint%20Assets/Legal%20Docs/MINT%20COMPLAINTS%20POLICY.pdf" class="hover:text-white transition-colors">Complaints Policy</a>
+                        <a href="https://teams.cloud.microsoft/l/message/19:8bbbcce5-eb42-4cbe-baaf-a2a8ca4d6f12_ebb9977b-5b76-4be6-a644-f8730951c990@unq.gbl.spaces/1774611096949?context=%7B%22contextType%22%3A%22chat%22%7D" class="hover:text-white transition-colors">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition-colors">Advertising Policy</a>
                         <a href="https://mfxnghmuccevsxwcetej.supabase.co/storage/v1/object/public/Mint%20Assets/Legal%20Docs/Risk%20Policy.pdf" class="hover:text-white transition-colors">Risk Policy</a>
-                        <a href="https://mfxnghmuccevsxwcetej.supabase.co/storage/v1/object/public/Mint%20Assets/Legal%20Docs/MINT%20AML%20POLICY.pdf" class="hover:text-white transition-colors">AML Policy</a>
+                        <a href="#" class="hover:text-white transition-colors">AML Policy</a>
                     </div>
                 </div>
             </div>
