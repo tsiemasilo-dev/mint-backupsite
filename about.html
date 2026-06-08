@@ -35,12 +35,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #ffffff; /* Flipped to White */
+            background-color: #ffffff;
         }
         
         .brand-logo-loader {
             width: 40px; height: auto; margin-bottom: 30px;
-            /* Removed invert(1) so the logo is dark/visible on white */
             filter: brightness(0) drop-shadow(0 0 10px rgba(92, 59, 207, 0.2));
         }
         
@@ -54,7 +53,6 @@
         .column-3 { animation-delay: 0.2s; }
         .segment { height: 60px; width: 100%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         
-        /* Changed background-color to a light grey for contrast on white */
         .icon-part { width: 100%; border-radius: 20px; background-color: #e2e8f0; opacity: 0.3; }
         .active .icon-part { background-color: #5c3bcf; opacity: 1; box-shadow: 0 0 20px rgba(92, 59, 207, 0.4); }
         
@@ -68,7 +66,6 @@
         .brackets::before, .brackets::after { content: ''; position: absolute; top: -1px; width: 4px; height: calc(100% + 2px); background: #5c3bcf; }
         .brackets::before { left: 0; } .brackets::after { right: 0; }
         
-        /* Changed brand-name-loader color to dark slate for visibility */
         .brand-name-loader { font-size: 11px; font-weight: 300; letter-spacing: 0.8em; text-transform: uppercase; margin: 50px 0 12px; color: #1e293b; opacity: 0.6; }
         .status-line { font-size: 10px; font-weight: 700; color: #5c3bcf; text-transform: uppercase; letter-spacing: 0.3em; animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 0.5; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
@@ -162,11 +159,6 @@
             transform: none;
         }
         
-        .director-card:hover .director-portrait {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
-
         /* Enhanced Mobile Menu Styling */
         #mobile-menu {
             background: #ffffff !important;
@@ -183,7 +175,6 @@
             pointer-events: auto;
         }
 
-        /* Ensure header items turn dark when menu is open */
         #main-header.menu-open .logo-img { filter: brightness(0) !important; }
         #main-header.menu-open #mobile-menu-btn { color: #000000 !important; }
 
@@ -192,7 +183,6 @@
             transform: translate(-50%, 0);
             pointer-events: auto;
         }
-        
     </style>
 </head>
 <body>
@@ -357,21 +347,6 @@
                             </p>
                         </div>
                     </div>
-                    <!-- 
-                    <div class="architect-row flex flex-col lg:flex-row items-center gap-10 md:gap-24">
-                        <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
-                            <img src="/images/MihleT.avif" alt="Mihle Matimba" loading="lazy" class="director-portrait w-full h-full object-cover">
-                        </div>
-                        
-                         <div class="w-full lg:w-3/5">
-                            <h3 class="text-3xl md:text-5xl font-light mb-2">Mihle Matimba</h3>
-                            <p class="text-xs font-bold text-[var(--mint-primary-purple)] uppercase tracking-widest mb-6 md:mb-8">Co-founder & CTO</p>
-                            <p class="text-base md:text-lg text-gray-500 font-light leading-relaxed max-w-xl">
-                                Mihle leads the engineering and technological innovation at MINT.  A strategic technology leader with a track record of architecting scalable systems and driving product innovation. Expert in building and mentoring high-performance engineering teams, modernising technical infrastructure, and aligning software development with business objectives. Passionate about leveraging emerging technologies to solve complex problems, optimise operational efficiency, and deliver robust, secure, and performant digital solutions.
-                            </p>
-                        </div>
-                    </div>
-                        -->
                     <div class="architect-row flex flex-col lg:flex-row items-center gap-10 md:gap-24" x-data="{ expanded: false }">
                         <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
                             <img src="/images/EletuS.avif" alt="Eletu Silo" loading="lazy" class="director-portrait w-full h-full object-cover">
@@ -397,7 +372,7 @@
                     </div>
                     <div class="architect-row flex flex-col lg:flex-row items-center gap-10 md:gap-24" x-data="{ expanded: false }">
                         <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
-                            <img src="/images/PetroneNel.avif" alt="Eletu Silo" loading="lazy" class="director-portrait w-full h-full object-cover">
+                            <img src="/images/PetroneNel.avif" alt="Petroné Nel" loading="lazy" class="director-portrait w-full h-full object-cover">
                         </div>
                         <div class="w-full lg:w-3/5">
                             <h3 class="text-3xl md:text-5xl font-light mb-2">Petroné Nel, ACMA, CGMA</h3>
@@ -412,89 +387,97 @@
             </div>
         </section>
 
-        <section class="py-20 md:py-32 bg-black text-white overflow-hidden">
+        <!-- New Stepped Carousel Board Section -->
+        <section class="py-20 md:py-32 bg-black text-white relative overflow-hidden" id="board-section">
             <div class="max-w-7xl mx-auto px-6 md:px-10">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-8">
-                    <div>
-                        <span class="text-white/40 font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block">businessal Trust</span>
-                        <h2 class="text-5xl md:text-8xl font-light tracking-tighter uppercase">The <span class="text-[var(--mint-secondary)]">Board</span></h2>
-                    </div>
-                    <div class="md:text-right max-w-xs">
-                        <p class="text-gray-400 text-sm font-light leading-relaxed">
-                            A governance structure built on world-class expertise in banking, markets, and industrial growth.
-                        </p>
-                    </div>
-                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="director-card group relative bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-8 rounded-[2rem] md:rounded-[3rem] hover:border-[var(--mint-secondary)]/50 transition-all duration-700">
-                        <div class="relative w-28 h-28 mb-8 overflow-hidden rounded-2xl md:rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                            <img src="/images/Boitumelo.avif" alt="Boitumelo Mokete" loading="lazy" class="director-portrait w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-700">
+                <!-- Header Text Mimicking the Screenshot layout -->
+                <div class="max-w-4xl mx-auto text-center mb-8 relative z-20">
+                    <h2 class="text-5xl md:text-6xl font-light tracking-tighter text-white mb-6 uppercase">
+                        The Board
+                    </h2>
+                    <p class="text-base md:text-lg text-gray-400 mb-0 max-w-2xl mx-auto font-light leading-relaxed">
+                        A governance structure built on world-class expertise in banking, markets, and industrial growth.
+                    </p>
+                </div>
+
+                <!-- Stepped Carousel Container (slightly taller to handle the dropdown on mobile) -->
+                <div class="step-card-container relative w-full h-[500px] md:h-[600px] flex justify-center items-center mt-5" style="perspective: 1200px;">
+                    
+                    <!-- Card 1: Boitumelo Mokete -->
+                    <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(0)">
+                        <img src="/images/BoitumeloNEW.avif" alt="Boitumelo Mokete" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
+                            <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Boitumelo Mokete</h4>
+                            <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Chairperson | CA(SA)</p>
+                            <p class="hidden-bio text-gray-300 text-[11px] md:text-xs font-light leading-relaxed opacity-0 max-h-0 overflow-hidden transition-all duration-500">
+                                Portfolio Manager at 36ONE Asset Management. An MBA graduate from the University of Oxford, bringing elite portfolio optimisation and strategic financial insight to the board.
+                            </p>
                         </div>
-                        <h4 class="text-2xl font-light mb-1 tracking-tight">Boitumelo Mokete</h4>
-                        <p class="text-[10px] font-bold text-[var(--mint-secondary)] uppercase tracking-widest mb-6">Chairperson | CA(SA)</p>
-                        <p class="text-sm text-gray-400 font-light leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
-                            Portfolio Manager at 36ONE Asset Management. An MBA graduate from the University of Oxford, bringing elite portfolio optimisation and strategic financial insight to the board.
-                        </p>
                     </div>
 
-                    <div class="director-card group relative bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-8 rounded-[2rem] md:rounded-[3rem] hover:border-[var(--mint-secondary)]/50 transition-all duration-700 lg:mt-12">
-                        <div class="relative w-28 h-28 mb-8 overflow-hidden rounded-2xl md:-rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                            <img src="/images/Khaya.avif" alt="Khaya Sithole" loading="lazy" class="director-portrait w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-700">
+                    <!-- Card 2: Khaya Sithole -->
+                    <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(1)">
+                        <img src="/images/KhayaNEW.avif" alt="Khaya Sithole" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
+                            <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Khaya Sithole</h4>
+                            <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Governance | CA(SA)</p>
+                            <p class="hidden-bio text-gray-300 text-[11px] md:text-xs font-light leading-relaxed opacity-0 max-h-0 overflow-hidden transition-all duration-500">
+                                Academic and governance specialist with extensive audit committee experience across JSE listed companies, providing strong independent oversight.
+                            </p>
                         </div>
-                        <h4 class="text-2xl font-light mb-1 tracking-tight">Khaya Sithole</h4>
-                        <p class="text-[10px] font-bold text-[var(--mint-secondary)] uppercase tracking-widest mb-6">Governance | CA(SA)</p>
-                        <p class="text-sm text-gray-400 font-light leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
-                            Academic and governance specialist with extensive audit committee experience across JSE listed companies, providing strong independent oversight.
-                        </p>
                     </div>
 
-                    <div class="director-card group relative bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-8 rounded-[2rem] md:rounded-[3rem] hover:border-[var(--mint-secondary)]/50 transition-all duration-700">
-                        <div class="relative w-28 h-28 mb-8 overflow-hidden rounded-2xl md:rotate-6 group-hover:rotate-0 transition-transform duration-500">
-                            <img src="/images/Kgomotso.avif" alt="Kgomotso Maphai" loading="lazy" class="director-portrait w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-700">
+                    <!-- Card 3: Kgomotso Maphai -->
+                    <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(2)">
+                        <img src="/images/KgomotsoNEW.avif" alt="Kgomotso Maphai" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
+                            <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Kgomotso Maphai</h4>
+                            <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Growth</p>
+                            <p class="hidden-bio text-gray-300 text-[11px] md:text-xs font-light leading-relaxed opacity-0 max-h-0 overflow-hidden transition-all duration-500">
+                                Group MD of Elderberry ZA with 20+ years in industrial development and global trade, driving Africa-first growth and commercial execution.
+                            </p>
                         </div>
-                        <h4 class="text-2xl font-light mb-1 tracking-tight">Kgomotso Maphai</h4>
-                        <p class="text-[10px] font-bold text-[var(--mint-secondary)] uppercase tracking-widest mb-6">Growth</p>
-                        <p class="text-sm text-gray-400 font-light leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
-                            Group MD of Elderberry ZA with 20+ years in industrial development and global trade, driving Africa-first growth and commercial execution.
-                        </p>
                     </div>
 
-                    <div class="director-card group relative lg:col-span-2 bg-white/5 border border-white/10 p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] hover:bg-white/[0.07] transition-all duration-700 flex flex-col md:flex-row gap-8 md:gap-10 items-start md:items-center">
-                        <div class="w-32 h-32 md:w-48 md:h-48 shrink-0 overflow-hidden rounded-[1.5rem] md:rounded-[2rem] border border-white/10">
-                            <img src="/images/Rufaro.avif" alt="Rufaro Mapanda" loading="lazy" class="director-portrait w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000">
-                        </div>
-                        <div>
-                            <h4 class="text-2xl md:text-3xl font-light mb-1 tracking-tight">Rufaro Mapanda</h4>
-                            <p class="text-[10px] font-bold text-[var(--mint-secondary)] uppercase tracking-widest mb-6">Markets</p>
-                            <p class="text-sm md:text-base text-gray-400 font-light leading-relaxed">
+                    <!-- Card 4: Rufaro Mapanda -->
+                    <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(3)">
+                        <img src="/images/RufaroNEW.avif" alt="Rufaro Mapanda" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
+                            <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Rufaro Mapanda</h4>
+                            <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Markets</p>
+                            <p class="hidden-bio text-gray-300 text-[11px] md:text-xs font-light leading-relaxed opacity-0 max-h-0 overflow-hidden transition-all duration-500">
                                 Head of Equity Trading at Absa. A Harvard Fellow and fintech co-founder with nearly two decades of experience spanning investment banking and global equity markets.
                             </p>
                         </div>
                     </div>
 
-                    <div class="director-card group relative bg-gradient-to-tr from-[var(--mint-primary-purple)]/20 to-transparent border border-white/10 p-8 rounded-[2rem] md:rounded-[3rem] hover:border-[var(--mint-secondary)] transition-all duration-700">
-                        <div class="relative w-28 h-28 mb-8 overflow-hidden rounded-2xl group-hover:scale-110 transition-transform duration-500">
-                            <img src="/images/Sli.avif" alt="Siliziwe Mafika" loading="lazy" class="director-portrait w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                    <!-- Card 5: Siliziwe Mafika -->
+                    <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(4)">
+                        <img src="/images/SliNEW.avif" alt="Siliziwe Mafika" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
+                            <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Siliziwe Mafika</h4>
+                            <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Banking | CA(SA)</p>
+                            <p class="hidden-bio text-gray-300 text-[11px] md:text-xs font-light leading-relaxed opacity-0 max-h-0 overflow-hidden transition-all duration-500">
+                                Partner at Deloitte and recognized leader in Financial Services. Specializes in Pan-African banking strategy and large-scale digital transformation.
+                            </p>
                         </div>
-                        <h4 class="text-2xl font-light mb-1 tracking-tight">Siliziwe Mafika</h4>
-                        <p class="text-[10px] font-bold text-[var(--mint-secondary)] uppercase tracking-widest mb-6">Banking | CA(SA)</p>
-                        <p class="text-sm text-gray-400 font-light leading-relaxed">
-                            Partner at Deloitte and recognized leader in Financial Services. Specializes in Pan-African banking strategy and large-scale digital transformation.
-                        </p>
                     </div>
+
                 </div>
-                
-                <div class="mt-20 md:mt-32 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div class="opacity-30 text-[9px] uppercase tracking-[0.6em] text-center md:text-left">
+
+                <!-- Additional Info (FSP & Keywords) -->
+                <div class="mt-20 md:mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div class="opacity-40 text-[9px] uppercase tracking-[0.6em] text-center md:text-left text-white font-semibold">
                         FSP 55118 | NCRCP22892
                     </div>
-                    <div class="flex flex-wrap justify-center gap-6 md:gap-8 opacity-40 text-[9px] md:text-[10px] uppercase tracking-widest font-bold">
+                    <div class="flex flex-wrap justify-center gap-6 md:gap-8 opacity-50 text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-white">
                         <span>Integrity</span>
                         <span>Sovereignty</span>
                         <span>Architecture</span>
                     </div>
                 </div>
+
             </div>
         </section>
     </main>
@@ -693,7 +676,7 @@
         });
 
         // Scroll Reveal Animations
-        gsap.utils.toArray('.architect-row, .director-card, section h2').forEach(el => {
+        gsap.utils.toArray('.architect-row, .step-card-container, section h2').forEach(el => {
             gsap.from(el, {
                 y: 50,
                 opacity: 0,
@@ -706,25 +689,120 @@
             });
         });
 
-        function checkDevice() {
+        // --- Stepped Carousel Logic ---
+        let carouselInterval;
+        let currentActiveIndex = 2;
+        let carouselSpeed = 4000; // Default speed in milliseconds
 
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-                        || window.innerWidth <= 1024;
-    
-        if (isMobile) {
-            window.location.href = "https://app.mymint.co.za/";
-        } else {
-            const toast = document.getElementById('mobile-only-toast');
-            if (toast) {
-                toast.classList.add('show');
+        function updateCarousel(activeIndex = 2, isAuto = false) {
+            currentActiveIndex = activeIndex;
+            const cards = document.querySelectorAll('.step-card');
+            const totalCards = cards.length;
+            
+            cards.forEach((card, index) => {
+                // Reset to base classes - ensuring overflow-hidden is NOT added back here
+                card.className = 'step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl';
                 
-                // Hide after 4 seconds
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 4000);
+                const img = card.querySelector('img');
+                const bio = card.querySelector('.hidden-bio');
+                
+                // Calculate relative offset with wrap-around for infinite loop effect
+                let diff = index - activeIndex;
+                if (diff > Math.floor(totalCards / 2)) {
+                    diff -= totalCards;
+                } else if (diff < -Math.floor(totalCards / 2)) {
+                    diff += totalCards;
+                }
+                
+                if (diff === 0) {
+                    // Center Card (Active)
+                    card.classList.add('z-30', 'scale-100', 'opacity-100', 'translate-x-0', 'shadow-2xl');
+                    img.classList.remove('grayscale');
+                    if(bio) {
+                        bio.classList.remove('opacity-0', 'max-h-0');
+                        bio.classList.add('opacity-100', 'max-h-40', 'mt-3');
+                    }
+                } else {
+                    // Non-center cards
+                    img.classList.add('grayscale');
+                    if(bio) {
+                        bio.classList.add('opacity-0', 'max-h-0');
+                        bio.classList.remove('opacity-100', 'max-h-40', 'mt-3');
+                    }
+                    
+                    if (diff === -1) {
+                        // Immediate Left
+                        card.classList.add('z-20', 'scale-[0.85]', 'opacity-80', '-translate-x-[50%]', 'md:-translate-x-[65%]');
+                    } else if (diff === 1) {
+                        // Immediate Right
+                        card.classList.add('z-20', 'scale-[0.85]', 'opacity-80', 'translate-x-[50%]', 'md:translate-x-[65%]');
+                    } else if (diff < 0) {
+                        // Far Left
+                        card.classList.add('z-10', 'scale-[0.70]', 'opacity-40', '-translate-x-[90%]', 'md:-translate-x-[120%]');
+                    } else if (diff > 0) {
+                        // Far Right
+                        card.classList.add('z-10', 'scale-[0.70]', 'opacity-40', 'translate-x-[90%]', 'md:translate-x-[120%]');
+                    }
+                }
+            });
+
+            // Reset auto-play if clicked manually
+            if (!isAuto) {
+                resetCarouselInterval();
             }
         }
-    }
+
+        function autoAdvanceCarousel() {
+            const cards = document.querySelectorAll('.step-card');
+            currentActiveIndex = (currentActiveIndex + 1) % cards.length;
+            updateCarousel(currentActiveIndex, true);
+        }
+
+        function resetCarouselInterval() {
+            clearInterval(carouselInterval);
+            carouselInterval = setInterval(autoAdvanceCarousel, carouselSpeed);
+        }
+
+        // Initialize Carousel
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCarousel(2); // Start with Kgomotso Maphai in the center
+            resetCarouselInterval(); // Start auto-play
+
+            // Hover functionality: slow down to half speed instead of stopping
+            const carouselContainer = document.querySelector('.step-card-container');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', () => {
+                    carouselSpeed = 8000; // Half speed (8 seconds)
+                    resetCarouselInterval();
+                });
+                
+                carouselContainer.addEventListener('mouseleave', () => {
+                    carouselSpeed = 4000; // Normal speed (4 seconds)
+                    resetCarouselInterval();
+                });
+            }
+        });
+
+
+        // Device Checker
+        function checkDevice() {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                            || window.innerWidth <= 1024;
+        
+            if (isMobile) {
+                window.location.href = "https://app.mymint.co.za/";
+            } else {
+                const toast = document.getElementById('mobile-only-toast');
+                if (toast) {
+                    toast.classList.add('show');
+                    
+                    // Hide after 4 seconds
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 4000);
+                }
+            }
+        }
     </script>
 </body>
 </html>
