@@ -691,10 +691,10 @@
 
         // --- Stepped Carousel Logic ---
         let carouselInterval;
-        let currentActiveIndex = 2;
+        let currentActiveIndex = 0;
         let carouselSpeed = 4000; // Default speed in milliseconds
 
-        function updateCarousel(activeIndex = 2, isAuto = false) {
+        function updateCarousel(activeIndex = 0, isAuto = false) {
             currentActiveIndex = activeIndex;
             const cards = document.querySelectorAll('.step-card');
             const totalCards = cards.length;
@@ -765,7 +765,7 @@
 
         // Initialize Carousel
         document.addEventListener('DOMContentLoaded', () => {
-            updateCarousel(2); // Start with Kgomotso Maphai in the center
+            updateCarousel(0); // Start with Boitumelo Mokete in the center
             resetCarouselInterval(); // Start auto-play
 
             // Hover functionality: slow down to half speed instead of stopping
