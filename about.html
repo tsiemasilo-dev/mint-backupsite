@@ -187,144 +187,280 @@
 </head>
 <body>
 
-    <div id="preloader">
-        <img src="https://static.wixstatic.com/media/f82622_7f62923a65f94af5b36b7958980b9ebc~mv2.png" alt="MINT Icon" loading="lazy" class="brand-logo-loader">
+    
+    <div id="preloader" class="fixed inset-0 z-[9999] flex flex-col justify-center items-center bg-white transition-opacity duration-500">
+        <img loading="lazy" src="/images/LOGO 2 MINT.png" alt="MINT Logo" class="h-8 md:h-12 w-auto object-contain brightness-0 animate-pulse mb-6">
+        <div class="w-48 h-1 bg-gray-200 rounded-full overflow-hidden">
+            <div class="h-full bg-[#5c3bcf] w-0 animate-[loadingBar_1s_ease-out_forwards]"></div>
+        </div>
+    </div>
+    <style>
+        @keyframes loadingBar {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => preloader.style.display = 'none', 500);
+                }, 400); // slight delay to show 100% bar
+            }
+        });
+    </script>
 
-        <div class="loader-viz">
-            <div class="brackets"></div>
-            <div class="slot-container">
-                <div class="slot-column">
-                    <div class="segment"><div class="icon-part" style="height: 25%;"></div></div>
-                    <div class="segment active"><div class="icon-part" style="height: 90%;"></div></div>
-                    <div class="segment"><div class="icon-part" style="height: 45%;"></div></div>
-                </div>
-                <div class="slot-column column-2">
-                    <div class="segment"><div class="icon-part" style="height: 55%;"></div></div>
-                    <div class="segment active"><div class="icon-part" style="height: 40%; border-radius: 4px 4px 15px 15px; margin-top: -15px;"></div></div>
-                    <div class="segment"><div class="icon-part" style="height: 25%;"></div></div>
-                </div>
-                <div class="slot-column column-3">
-                    <div class="segment"><div class="icon-part" style="height: 40%;"></div></div>
-                    <div class="segment active"><div class="icon-part" style="height: 90%;"></div></div>
-                    <div class="segment"><div class="icon-part" style="height: 25%;"></div></div>
-                </div>
-            </div>
         </div>
     
         <div class="brand-name-loader">MINT</div>
         <div class="status-line">Money in Transit</div>
     </div>
     
-    <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-transparent border-b border-transparent transition-all duration-300">
+        <header id="main-header"
+        class="fixed top-0 left-0 w-full z-50 bg-transparent border-b border-transparent transition-all duration-300">
         <nav class="flex items-center justify-between px-6 md:px-10 py-6 max-w-7xl mx-auto">
-            <a href="index.html">
-                <img src="/images/LOGO 2 MINT.png" alt="MINT Logo" loading="lazy" class="logo-img h-3.5 w-auto object-contain brightness-0 invert transition-all duration-300"> 
-            </a>
-            
-            <button id="mobile-menu-btn" class="lg:hidden p-2 text-white focus:outline-none z-50 transition-colors duration-300">
-                <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-                <svg id="close-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <img src="/images/LOGO 2 MINT.png" alt="MINT Logo"
+                class="logo-img h-3.5 w-auto object-contain brightness-0 invert transition-all duration-300">
+
+            <button id="mobile-menu-btn"
+                class="lg:hidden p-2 text-white focus:outline-none z-50 transition-colors duration-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
                 </svg>
             </button>
 
             <div class="hidden lg:flex items-center gap-12 text-xs font-light tracking-widest text-white uppercase">
-                <a href="index.html" class="nav-link hover:text-gray-300 transition-all text-sm">Personal</a>
-                <a href="business.html" class="nav-link hover:text-gray-300 transition-all text-sm">Business</a>
-                <a href="about.html" class="nav-link text-[var(--mint-secondary)] font-bold transition-all text-sm">About</a>
-                <a href="contact.html" class="nav-link hover:text-gray-300 transition-all text-sm">Contact</a>
+                <div class="group py-4">
+                    <a href="/index.html"
+                        class="nav-link personal-trigger hover:text-gray-300 transition-all text-sm flex items-center gap-1">
+                        Personal
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+
+                    <div class="nav-dropdown absolute top-full left-0 w-full shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-t border-gray-100 bg-white/95 backdrop-blur-xl">
+                        <div class="max-w-7xl mx-auto px-6 md:px-10 py-12 flex">
+                            
+                            <!-- Left Column -->
+                            <div class="w-1/4 pr-8 border-r border-gray-200">
+                                <h3 class="text-base font-bold text-gray-900 mb-6">Personal</h3>
+                                <div class="flex flex-col gap-4">
+                                    <button onmouseenter="showDesktopMegaPane('mega-invest-desktop')" class="mega-tab-btn-desktop text-left text-sm text-[var(--mint-primary-purple)] font-semibold hover:text-[var(--mint-primary-purple)] transition-colors tracking-tight">Invest</button>
+                                    <button onmouseenter="showDesktopMegaPane('mega-borrow-desktop')" class="mega-tab-btn-desktop text-left text-sm text-gray-500 hover:text-[var(--mint-primary-purple)] transition-colors tracking-tight">Borrow</button>
+                                    <button onmouseenter="showDesktopMegaPane('mega-transact-desktop')" class="mega-tab-btn-desktop text-left text-sm text-gray-500 hover:text-[var(--mint-primary-purple)] transition-colors tracking-tight">Transact</button>
+                                </div>
+                            </div>
+
+                            <!-- Right Column (Columns layout) -->
+                            <div class="w-3/4 pl-12">
+                                <h3 class="text-base font-bold text-gray-900 mb-6">Explore</h3>
+                                
+                                <!-- Invest Pane -->
+                                <div id="mega-invest-desktop" class="mega-content-pane-desktop columns-1 sm:columns-2 gap-8 space-y-4">
+                                    <a href="/index.html#investSection" class="dropdown-item block text-sm text-gray-500 hover:text-gray-900 transition-colors tracking-tight break-inside-avoid">Invest Overview</a>
+                                    
+                                    <a href="/index.html#assetDeploymentSection" class="dropdown-item block text-sm text-gray-500 hover:text-gray-900 transition-colors tracking-tight break-inside-avoid">Assets, News & Goals</a>
+                                </div>
+
+                                <!-- Borrow Pane -->
+                                <div id="mega-borrow-desktop" class="mega-content-pane-desktop hidden columns-1 sm:columns-2 gap-8 space-y-4">
+                                    <a href="/credit.html" class="dropdown-item block text-sm text-gray-500 hover:text-gray-900 transition-colors tracking-tight break-inside-avoid">Credit Marketplace</a>
+                                    <a href="/index.html#borrowSection" class="dropdown-item block text-sm text-gray-500 hover:text-gray-900 transition-colors tracking-tight break-inside-avoid">Borrow Overview</a>
+                                </div>
+
+                                <!-- Transact Pane -->
+                                <div id="mega-transact-desktop" class="mega-content-pane-desktop hidden columns-1 sm:columns-2 gap-8 space-y-4">
+                                    <a href="/index.html#transactSection" class="dropdown-item block text-sm text-gray-500 hover:text-gray-900 transition-colors tracking-tight break-inside-avoid">Transact Overview</a>
+                                </div>
+                            </div>
+
+                            <script>
+                                function showDesktopMegaPane(paneId) {
+                                    const buttons = document.querySelectorAll('.mega-tab-btn-desktop');
+                                    buttons.forEach(btn => {
+                                        if (btn.getAttribute('onmouseenter').includes(paneId)) {
+                                            btn.classList.remove('text-gray-500', 'font-normal');
+                                            btn.classList.add('text-[var(--mint-primary-purple)]', 'font-semibold');
+                                        } else {
+                                            btn.classList.remove('text-[var(--mint-primary-purple)]', 'font-semibold');
+                                            btn.classList.add('text-gray-500', 'font-normal');
+                                        }
+                                    });
+
+                                    const panes = document.querySelectorAll('.mega-content-pane-desktop');
+                                    panes.forEach(pane => {
+                                        if (pane.id === paneId) {
+                                            pane.classList.remove('hidden');
+                                        } else {
+                                            pane.classList.add('hidden');
+                                        }
+                                    });
+                                }
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/business.html" class="nav-link hover:text-gray-300 transition-all text-sm">Business</a>
+                <a href="/about.html" class="nav-link hover:text-gray-300 transition-all text-sm">About</a>
+                <a href="/contact.html" class="nav-link hover:text-gray-300 transition-all text-sm">Contact</a>
             </div>
 
             <div class="hidden lg:block">
-            <button onclick="checkDevice()" class="mint-cta-btn group">
-                <span class="text-xs font-bold text-[var(--mint-primary-purple)] uppercase tracking-wide">Go to Mint</span>
-                <div class="mint-cta-icon" style="width: 2rem; height: 2rem;">
-                    <svg class="transition-transform duration-300" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l10-10M7 7h10v10"/></svg>
-                    <svg class="absolute -translate-x-8 translate-y-8 transition-transform duration-300" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l10-10M7 7h10v10"/></svg>
-                </div>
-            </button>
-            </div>
-        </nav>
-
-        <div id="mobile-menu" class="hidden absolute top-0 left-0 w-full bg-white shadow-2xl rounded-b-[2rem] p-8 pt-24 flex-col gap-8 lg:hidden z-40 border-t border-gray-100">
-            <div class="flex flex-col gap-6 text-center text-sm font-medium text-gray-800 uppercase tracking-[0.3em]">
-                <a href="index.html" class="hover:text-[var(--mint-primary-purple)] py-3 border-b border-gray-50 transition-colors">Personal</a>
-                <a href="business.html" class="hover:text-[var(--mint-primary-purple)] py-3 border-b border-gray-50 transition-colors">Business</a>
-                <a href="about.html" class="text-[var(--mint-primary-purple)] font-bold py-3 border-b border-gray-50">About</a>
-                <a href="contact.html" class="hover:text-[var(--mint-primary-purple)] py-3 transition-colors">Contact</a>
-            </div>
-            <button onclick="checkDevice()" class="w-full flex justify-center items-center gap-2 bg-[var(--mint-primary-purple)] text-white px-7 py-4 rounded-full text-[11px] font-bold uppercase tracking-widest shadow-lg">
-                Go to Mint
-            </button>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero-section">
-            <video autoplay muted loop playsinline class="hero-video">
-                <source src="videos/Abouthero.mp4" preload="none" type="video/mp4">
-            </video>
-            <div class="hero-overlay"></div>
-            <div class="max-w-7xl w-full px-6 md:px-10 relative z-10">
-                <div class="max-w-4xl">
-                    <span class="text-white/50 font-bold text-[11px] uppercase tracking-[0.5em] mb-6 block">About MINT</span>
-                    <h1 class="text-5xl md:text-9xl font-light text-white tracking-tighter leading-[0.95] mb-8 uppercase">
-                        Architecting <br class="hidden md:block">the future of <span class="text-[var(--mint-secondary)]">capital.</span>
-                    </h1>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-20 md:py-32 bg-white relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-1/3 h-full bg-slate-50/50 -skew-x-12 translate-x-1/2 z-0 hidden lg:block"></div>
-            
-            <div class="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
-                <div class="flex flex-col lg:flex-row gap-16 lg:gap-24">
-                    <div class="lg:w-1/3">
-                        <div class="lg:sticky lg:top-32">
-                            <h2 class="text-[var(--mint-primary-purple)] font-bold text-[11px] uppercase tracking-[0.5em] mb-6 flex items-center gap-4">
-                                <span class="w-8 h-[1px] bg-[var(--mint-primary-purple)]"></span>
-                                Who We Are
-                            </h2>
-                            <h3 class="text-4xl md:text-6xl font-light tracking-tighter leading-[1.1] text-black">
-                                A modern <br><span class="italic font-serif">architecture</span> <br>for wealth.
-                            </h3>
-                        </div>
+                <button onclick="checkDevice()" class="mint-cta-btn group">
+                    <span class="text-xs font-bold text-[var(--mint-primary-purple)] uppercase tracking-wide">Go to
+                        MINT</span>
+                    <div class="mint-cta-icon" style="width: 2rem; height: 2rem;">
+                        <svg class="transition-transform duration-300" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M7 17l10-10M7 7h10v10" />
+                        </svg>
+                        <svg class="absolute -translate-x-8 translate-y-8 transition-transform duration-300" width="16"
+                            height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M7 17l10-10M7 7h10v10" />
+                        </svg>
                     </div>
+                </button>
+            </div>
 
-                    <div class="lg:w-2/3">
-                        <div class="space-y-12 text-lg md:text-2xl font-light text-gray-600 leading-relaxed">
-                            <div class="group border-l-2 border-transparent hover:border-[var(--mint-primary-purple)] pl-0 md:hover:pl-8 transition-all duration-500 ease-out">
-                                <p class="text-black font-medium text-2xl md:text-3xl mb-4 transition-transform group-hover:translate-x-2">
-                                    MINT is a modern private wealth platform built on alignment and fair access.
-                                </p>
-                            </div>
-                            
-                            <p>
-                                MINT exists to redefine how ambitious individuals grow, manage and leverage capital. We combine disciplined investment strategies, transparent data and intelligent technology to provide structured access across asset classes without the traditional opacity of asset management.
-                            </p>
+                        <div id="mobile-menu" class="hidden fixed inset-0 w-full h-[100dvh] bg-[#0a0a0a] z-[100] flex-col overflow-hidden text-white">
+                
+                <!-- Top Header for Menu -->
+                <div class="flex justify-between items-center p-6 border-b border-[#222]">
+                    <img loading="lazy" src="/images/LOGO 2 MINT.png" alt="MINT Logo" class="h-4 w-auto object-contain brightness-0 invert">
+                    <button id="mobile-menu-close" class="p-2 -mr-2 text-white hover:text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
 
-                            <div class="p-8 md:p-10 bg-[var(--mint-bg)] rounded-[2rem] md:rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl transition-shadow duration-700">
-                                <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-[var(--mint-primary-purple)] mb-4">The Performance Model</h4>
-                                <p class="text-gray-800">
-                                    At our core, we believe wealth management should be performance-driven, not product-driven. That is why we operate on a <span class="text-black font-semibold">performance-only fee model</span>. We earn when you earn. No hidden incentives. No unnecessary complexity.
-                                </p>
-                            </div>
-
-                            <p>
-                                Through curated OpenStrategies, real-time tracking tools, portfolio-backed lending and seamless capital mobility, MINT delivers more than investment access. We provide financial architecture.
-                            </p>
-
-                            <div class="pt-8 flex items-center gap-6">
-                                <div class="h-px flex-grow bg-gray-200"></div>
-                                <p class="text-black font-medium text-sm md:text-lg uppercase tracking-widest whitespace-nowrap">Capital Infrastructure</p>
-                            </div>
-                        </div>
+                <!-- Main View (Level 1) -->
+                <div id="mob-view-main" class="flex flex-col w-full h-full p-6 overflow-y-auto">
+                    <button onclick="showMobView('mob-view-personal')" class="flex justify-between items-center py-5 border-b border-[#222] text-left">
+                        <span class="text-[15px] font-light text-gray-200">Personal</span>
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                    <a href="/business.html" class="flex justify-between items-center py-5 border-b border-[#222]">
+                        <span class="text-[15px] font-light text-gray-200">Business</span>
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                    <a href="/about.html" class="flex justify-between items-center py-5 border-b border-[#222]">
+                        <span class="text-[15px] font-light text-gray-200">About</span>
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                    <a href="/contact.html" class="flex justify-between items-center py-5 border-b border-[#222]">
+                        <span class="text-[15px] font-light text-gray-200">Contact</span>
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                    <div class="mt-8">
+                        <button onclick="checkDevice()" class="w-full flex justify-center items-center gap-2 bg-[var(--mint-primary-purple)] text-white px-7 py-4 rounded-full text-xs font-bold uppercase tracking-widest shadow-sm">
+                            Go to MINT
+                        </button>
                     </div>
                 </div>
+
+                <!-- Personal View (Level 2) -->
+                <div id="mob-view-personal" class="hidden flex-col w-full h-full overflow-y-auto">
+                    <!-- Back Button & Title -->
+                    <div class="flex flex-col border-b border-[#222] px-6 pt-6 pb-4">
+                        <button onclick="showMobView('mob-view-main')" class="flex items-center gap-2 text-gray-300 w-fit mb-4">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+                        <h2 class="text-xl font-light text-white pl-1">Personal</h2>
+                    </div>
+                    
+                    <div class="p-6 pt-2">
+                        <!-- Home -->
+                        <a href="/index.html#blackSection" class="flex justify-between items-center py-4 border-b border-[#222] text-left">
+                            <span class="text-[15px] font-light text-gray-200">Home</span>
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        
+                        <!-- Invest Accordion -->
+                        <div class="flex flex-col border-b border-[#222]">
+                            <button onclick="toggleMobileAccordion('mob-sub-invest', 'mob-icon-invest')" class="flex justify-between items-center w-full py-4">
+                                <span class="text-[15px] font-light text-gray-200">Invest</span>
+                                <span id="mob-icon-invest" class="text-gray-500 text-lg font-light leading-none transition-transform duration-300">+</span>
+                            </button>
+                            <div id="mob-sub-invest" class="hidden flex-col pl-4 pb-2">
+                                <a href="/index.html#investSection" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Invest Overview</a>
+                                                                <a href="/index.html#assetDeploymentSection" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Assets, News & Goals</a>
+                            </div>
+                        </div>
+
+                        <!-- Borrow Accordion -->
+                        <div class="flex flex-col border-b border-[#222]">
+                            <button onclick="toggleMobileAccordion('mob-sub-borrow', 'mob-icon-borrow')" class="flex justify-between items-center w-full py-4">
+                                <span class="text-[15px] font-light text-gray-200">Borrow</span>
+                                <span id="mob-icon-borrow" class="text-gray-500 text-lg font-light leading-none transition-transform duration-300">+</span>
+                            </button>
+                            <div id="mob-sub-borrow" class="hidden flex-col pl-4 pb-2">
+                                <a href="/credit.html" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Credit Marketplace</a>
+                                <a href="/index.html#borrowSection" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Borrow Overview</a>
+                            </div>
+                        </div>
+
+                        <!-- Transact Accordion -->
+                        <div class="flex flex-col border-b border-[#222]">
+                            <button onclick="toggleMobileAccordion('mob-sub-transact', 'mob-icon-transact')" class="flex justify-between items-center w-full py-4">
+                                <span class="text-[15px] font-light text-gray-200">Transact</span>
+                                <span id="mob-icon-transact" class="text-gray-500 text-lg font-light leading-none transition-transform duration-300">+</span>
+                            </button>
+                            <div id="mob-sub-transact" class="hidden flex-col pl-4 pb-2">
+                                <a href="/index.html#transactSection" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Transact Overview</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function showMobView(viewId) {
+                        const mainView = document.getElementById('mob-view-main');
+                        const personalView = document.getElementById('mob-view-personal');
+                        if (viewId === 'mob-view-personal') {
+                            mainView.classList.add('hidden');
+                            personalView.classList.remove('hidden');
+                            personalView.classList.add('flex');
+                        } else {
+                            personalView.classList.add('hidden');
+                            personalView.classList.remove('flex');
+                            mainView.classList.remove('hidden');
+                        }
+                    }
+
+                    function toggleMobileAccordion(contentId, iconId) {
+                        const content = document.getElementById(contentId);
+                        const icon = document.getElementById(iconId);
+                        if (content.classList.contains('hidden')) {
+                            content.classList.remove('hidden');
+                            content.classList.add('flex');
+                            icon.style.transform = 'rotate(45deg)';
+                        } else {
+                            content.classList.add('hidden');
+                            content.classList.remove('flex');
+                            icon.style.transform = 'rotate(0deg)';
+                        }
+                    }
+
+                    document.getElementById('mobile-menu-close').addEventListener('click', () => {
+                        const menu = document.getElementById('mobile-menu');
+                        menu.classList.add('hidden');
+                        menu.classList.remove('flex');
+                    });
+
+                    document.querySelectorAll('#mobile-menu a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            const menu = document.getElementById('mobile-menu');
+                            menu.classList.add('hidden');
+                            menu.classList.remove('flex');
+                        });
+                    });
+                </script>
             </div>
+
         </section>
 
         <section class="py-20 md:py-32 bg-[#f8f9fc]">
@@ -406,7 +542,7 @@
                     
                     <!-- Card 1: Boitumelo Mokete -->
                     <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(0)">
-                        <img src="/images/BoitumeloNEW.avif" alt="Boitumelo Mokete" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <img loading="lazy" src="/images/BoitumeloNEW.avif" alt="Boitumelo Mokete" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
                         <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
                             <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Boitumelo Mokete</h4>
                             <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Chairperson | CA(SA)</p>
@@ -418,7 +554,7 @@
 
                     <!-- Card 2: Khaya Sithole -->
                     <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(1)">
-                        <img src="/images/KhayaNEW.avif" alt="Khaya Sithole" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <img loading="lazy" src="/images/KhayaNEW.avif" alt="Khaya Sithole" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
                         <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
                             <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Khaya Sithole</h4>
                             <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Governance | CA(SA)</p>
@@ -430,7 +566,7 @@
 
                     <!-- Card 3: Kgomotso Maphai -->
                     <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(2)">
-                        <img src="/images/KgomotsoNEW.avif" alt="Kgomotso Maphai" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <img loading="lazy" src="/images/KgomotsoNEW.avif" alt="Kgomotso Maphai" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
                         <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
                             <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Kgomotso Maphai</h4>
                             <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Growth</p>
@@ -442,7 +578,7 @@
 
                     <!-- Card 4: Rufaro Mapanda -->
                     <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(3)">
-                        <img src="/images/RufaroNEW.avif" alt="Rufaro Mapanda" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <img loading="lazy" src="/images/RufaroNEW.avif" alt="Rufaro Mapanda" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
                         <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
                             <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Rufaro Mapanda</h4>
                             <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Markets</p>
@@ -454,7 +590,7 @@
 
                     <!-- Card 5: Siliziwe Mafika -->
                     <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(4)">
-                        <img src="/images/SliNEW.avif" alt="Siliziwe Mafika" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
+                        <img loading="lazy" src="/images/SliNEW.avif" alt="Siliziwe Mafika" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
                         <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
                             <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Siliziwe Mafika</h4>
                             <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Banking | CA(SA)</p>
@@ -494,7 +630,7 @@
                 <p class="text-gray-700 text-sm font-medium">Switch to your phone to continue.</p>
                 <p class="text-gray-600 text-xs">Scan the code below to open the app.</p>
             </div>
-            <img src="/images/MINTSITE.png" alt="MINT app QR code" class="w-full h-auto object-contain rounded-xl border border-gray-200 bg-white p-2 shadow-sm">
+            <img loading="lazy" src="/images/MINTSITE.png" alt="MINT app QR code" class="w-full h-auto object-contain rounded-xl border border-gray-200 bg-white p-2 shadow-sm">
         </div>
     </div>
     

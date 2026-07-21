@@ -3,180 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact MINT | Capital Infrastructure</title>
+    <title>MINT Credit — South Africa's #1 Portfolio-Backed Credit</title>
+    <meta name="description" content="Borrow against your portfolio at Prime − 1.5%. Compare every major lender in one place. No credit check to browse.">
     <link rel="icon" type="image/png" href="/images/Mint%20Favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <style>
-        :root {
-            --mint-dark-purple: #31005e;
-            --mint-primary-purple: #5c3bcf;
-            --mint-secondary: #a78bfa;
-            --mint-bg: #fdfcff;
+    
+    <!-- Tailwind via CDN with config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oxblood: "#ffffff", // Main background (White)
+                        ink: "#ffffff", // Inverse (White for phone shell, buttons)
+                        cream: "#111827", // Main text/borders (Dark Gray/Black)
+                        parchment: "rgba(0,0,0,0.05)",
+                        acid: "#5c3bcf", // Mint Primary Purple
+                        brass: "#ddc357", // Mint Gold
+                        secondary: "#f9fafb", // Light gray for table rows
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        serif: ['"Inter"', 'sans-serif'],
+                        mono: ['"Inter"', 'sans-serif'],
+                    },
+                    keyframes: {
+                        rise: {
+                            '0%': { opacity: '0', transform: 'translateY(24px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        drift: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        dotPulse: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.35', transform: 'scale(0.7)' },
+                        }
+                    },
+                    animation: {
+                        rise: 'rise 800ms cubic-bezier(0.32, 0.72, 0, 1) both',
+                        drift: 'drift 6s ease-in-out infinite',
+                        dot: 'dotPulse 1.6s ease-in-out infinite',
+                    }
+                }
+            }
         }
-
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .eyebrow {
+                @apply font-mono text-[11px] uppercase tracking-[0.28em];
+            }
+            .mag-h1 {
+                @apply font-serif text-[clamp(64px,12vw,200px)] leading-[0.88] tracking-[-0.02em];
+            }
+            .mag-h3 {
+                @apply font-serif text-[clamp(32px,5vw,72px)] leading-none tracking-[-0.015em];
+            }
+            .body-lg {
+                @apply text-[18px] leading-[1.55] text-cream/80;
+            }
+        }
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--mint-bg);
-            color: #111;
-            margin: 0;
-            overflow-x: hidden;
+            background-color: #ffffff;
+            @apply text-cream font-sans;
         }
-
-        /* Slot-style Preloader CSS */
-        /* Slot-style Preloader CSS - Updated for White Theme */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #ffffff; /* Flipped to White */
+        ::selection {
+            @apply bg-acid text-ink;
         }
-        
-        .brand-logo-loader {
-            width: 40px; height: auto; margin-bottom: 30px;
-            /* Removed invert(1) so the logo is dark/visible on white */
-            filter: brightness(0) drop-shadow(0 0 10px rgba(92, 59, 207, 0.2));
+        .blur-backdrop {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
-        
-        .loader-viz { position: relative; display: flex; flex-direction: column; align-items: center; }
-        .slot-container { display: flex; gap: 12px; height: 60px; overflow: hidden; position: relative; padding: 10px 0; }
-        .slot-column {
-            width: 12px; display: flex; flex-direction: column;
-            animation: slideUp 0.7s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-        }
-        .column-2 { animation-delay: 0.1s; }
-        .column-3 { animation-delay: 0.2s; }
-        .segment { height: 60px; width: 100%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        
-        /* Changed background-color to a light grey for contrast on white */
-        .icon-part { width: 100%; border-radius: 20px; background-color: #e2e8f0; opacity: 0.3; }
-        .active .icon-part { background-color: #5c3bcf; opacity: 1; box-shadow: 0 0 20px rgba(92, 59, 207, 0.4); }
-        
-        @keyframes slideUp { 0% { transform: translateY(0); } 100% { transform: translateY(-180px); } }
-        
-        .brackets {
-            position: absolute; top: 50%; left: -30px; right: -30px; height: 36px;
-            transform: translateY(-50%); border-top: 1px solid rgba(92, 59, 207, 0.1);
-            border-bottom: 1px solid rgba(92, 59, 207, 0.1); pointer-events: none;
-        }
-        .brackets::before, .brackets::after { content: ''; position: absolute; top: -1px; width: 4px; height: calc(100% + 2px); background: #5c3bcf; }
-        .brackets::before { left: 0; } .brackets::after { right: 0; }
-        
-        /* Changed brand-name-loader color to dark slate for visibility */
-        .brand-name-loader { font-size: 11px; font-weight: 300; letter-spacing: 0.8em; text-transform: uppercase; margin: 50px 0 12px; color: #1e293b; opacity: 0.6; }
-        .status-line { font-size: 10px; font-weight: 700; color: #5c3bcf; text-transform: uppercase; letter-spacing: 0.3em; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.5; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
-        
-        /* --- SHARED HEADER STYLES --- */
-        #main-header { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        #main-header.header-hidden { transform: translateY(-100%); }
-        
-        #main-header.header-dark {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            backdrop-filter: blur(12px);
-        }
-        #main-header.header-dark .nav-link { color: #4b5563; }
-        #main-header.header-dark .logo-img { filter: brightness(0) !important; }
-        #main-header.header-dark #mobile-menu-btn { color: #000; }
-
-        .mint-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 1.5rem;
-            background-color: #f5f2ff;
-            padding: 0.35rem 0.35rem 0.35rem 1.5rem;
-            border-radius: 9999px;
-            border: 1px solid rgba(92, 59, 207, 0.15);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-
-        .mint-cta-icon {
-            background-color: var(--mint-primary-purple);
-            color: white;
-            width: 2.5rem; height: 2.5rem;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 9999px; position: relative; overflow: hidden;
-        }
-
-        .mint-cta-btn:hover .mint-cta-icon svg:first-child { transform: translate(2rem, -2rem); }
-        .mint-cta-btn:hover .mint-cta-icon svg:last-child { transform: translate(0, 0); }
-
-        /* --- CONTACT SPECIFIC --- */
-        .contact-grid-bg {
-            background-image: 
-                linear-gradient(to right, rgba(92, 59, 207, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(92, 59, 207, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
-
-        .glass-form {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(92, 59, 207, 0.1);
-        }
-
-        .input-group input, .input-group textarea, .input-group select {
-            width: 100%;
-            background: white;
-            border: 1px solid #e5e7eb;
-            padding: 1rem 1.25rem;
-            border-radius: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .input-group input:focus, .input-group textarea:focus {
-            border-color: var(--mint-primary-purple);
-            box-shadow: 0 0 0 4px rgba(92, 59, 207, 0.05);
-        }
-
-        .glow-accent {
-            position: absolute;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(92, 59, 207, 0.08) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Mobile Menu Transitions */
-        #mobile-menu {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        #mobile-menu.flex {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* Ensure header items are visible over white menu */
-        #main-header.menu-open .logo-img { filter: brightness(0) !important; z-index: 60; }
-        #main-header.menu-open #mobile-menu-btn { color: #000 !important; z-index: 60; }
-        
-        #mobile-only-toast.show {
-        opacity: 1;
-        transform: translate(-50%, 0);
-        pointer-events: auto;
-    }
     </style>
 </head>
-<body class="contact-grid-bg">
 
-    
     <div id="preloader" class="fixed inset-0 z-[9999] flex flex-col justify-center items-center bg-white transition-opacity duration-500">
-        <img loading="lazy" src="/images/LOGO 2 MINT.png" alt="MINT Logo" class="h-8 md:h-12 w-auto object-contain brightness-0 animate-pulse mb-6">
+        <img src="/images/LOGO 2 MINT.png" alt="MINT Logo" class="h-8 md:h-12 w-auto object-contain brightness-0 animate-pulse mb-6">
         <div class="w-48 h-1 bg-gray-200 rounded-full overflow-hidden">
             <div class="h-full bg-[#5c3bcf] w-0 animate-[loadingBar_1s_ease-out_forwards]"></div>
         </div>
@@ -189,23 +98,46 @@
         }
     </style>
     <script>
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
+        window.addEventListener("load", function() {
+            const preloader = document.getElementById("preloader");
             if (preloader) {
                 setTimeout(() => {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => preloader.style.display = 'none', 500);
+                    preloader.style.opacity = "0";
+                    setTimeout(() => preloader.style.display = "none", 500);
                 }, 400); // slight delay to show 100% bar
             }
         });
     </script>
 
+    <body class="min-h-screen">
+
+    <div id="preloader" class="fixed inset-0 z-[9999] flex flex-col justify-center items-center bg-white transition-opacity duration-500">
+        <img src="/images/LOGO 2 MINT.png" alt="MINT Logo" class="h-8 md:h-12 w-auto object-contain brightness-0 animate-pulse mb-6">
+        <div class="w-48 h-1 bg-gray-200 rounded-full overflow-hidden">
+            <div class="h-full bg-[#5c3bcf] w-0 animate-[loadingBar_1s_ease-out_forwards]"></div>
         </div>
-    
-        <div class="brand-name-loader">MINT</div>
-        <div class="status-line">Money in Transit</div>
     </div>
-    
+    <style>
+        @keyframes loadingBar {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+    </style>
+    <script>
+        window.addEventListener("load", function() {
+            const preloader = document.getElementById("preloader");
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = "0";
+                    setTimeout(() => preloader.style.display = "none", 500);
+                }, 400); // slight delay to show 100% bar
+            }
+        });
+    </script>
+
+
+    <!-- Navbar -->
         <header id="main-header"
         class="fixed top-0 left-0 w-full z-50 bg-transparent border-b border-transparent transition-all duration-300">
         <nav class="flex items-center justify-between px-6 md:px-10 py-6 max-w-7xl mx-auto">
@@ -314,7 +246,7 @@
                 </button>
             </div>
 
-            <div id="mobile-menu" class="hidden fixed inset-0 w-full h-[100dvh] bg-[#0a0a0a] z-[100] flex-col overflow-hidden text-white">
+                        <div id="mobile-menu" class="hidden fixed inset-0 w-full h-[100dvh] bg-[#0a0a0a] z-[100] flex-col overflow-hidden text-white">
                 
                 <!-- Top Header for Menu -->
                 <div class="flex justify-between items-center p-6 border-b border-[#222]">
@@ -361,7 +293,7 @@
                     
                     <div class="p-6 pt-2">
                         <!-- Home -->
-                        <a href="#blackSection" class="flex justify-between items-center py-4 border-b border-[#222] text-left">
+                        <a href="/index.html#blackSection" class="flex justify-between items-center py-4 border-b border-[#222] text-left">
                             <span class="text-[15px] font-light text-gray-200">Home</span>
                             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
                         </a>
@@ -374,8 +306,7 @@
                             </button>
                             <div id="mob-sub-invest" class="hidden flex-col pl-4 pb-2">
                                 <a href="/index.html#investSection" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Invest Overview</a>
-                                
-                                <a href="/index.html#assetDeploymentSection" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Assets, News & Goals</a>
+                                                                <a href="/index.html#assetDeploymentSection" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Assets, News & Goals</a>
                             </div>
                         </div>
 
@@ -386,8 +317,8 @@
                                 <span id="mob-icon-borrow" class="text-gray-500 text-lg font-light leading-none transition-transform duration-300">+</span>
                             </button>
                             <div id="mob-sub-borrow" class="hidden flex-col pl-4 pb-2">
-                                <a href="/credit.html" class="dropdown-item block text-sm text-gray-500 hover:text-gray-900 transition-colors tracking-tight break-inside-avoid">Credit Marketplace</a>
-                                    <a href="/index.html#borrowSection" class="dropdown-item block text-sm text-gray-500 hover:text-gray-900 transition-colors tracking-tight break-inside-avoid">Borrow Overview</a>
+                                <a href="/credit.html" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Credit Marketplace</a>
+                                <a href="/index.html#borrowSection" class="text-[14px] font-light text-gray-400 py-3 border-b border-[#222] last:border-0">Borrow Overview</a>
                             </div>
                         </div>
 
@@ -448,127 +379,201 @@
                     });
                 </script>
             </div>
-        </nav>
-    </header>
 
-
-    <main class="pt-32 pb-24 relative">
-        <div class="glow-accent top-0 right-0"></div>
-        <div class="glow-accent bottom-0 left-0"></div>
-
-        <section class="max-w-7xl mx-auto px-6 md:px-10 mb-20 text-center lg:text-left">
-            <div class="inline-flex items-center gap-3 px-4 py-2 bg-purple-50 rounded-full mb-6">
-                <span class="w-2 h-2 bg-[var(--mint-primary-purple)] rounded-full animate-pulse"></span>
-                <span class="text-[10px] font-bold text-[var(--mint-primary-purple)] uppercase tracking-widest">Connect with our architects</span>
-            </div>
-            <h1 class="text-5xl md:text-8xl font-light tracking-tighter text-gray-900 leading-[0.9] uppercase mb-8">
-                Build your <br><span class="italic font-serif text-[var(--mint-primary-purple)]">capital</span> legacy.
-            </h1>
-            <p class="text-gray-500 text-lg md:text-xl font-light max-w-2xl leading-relaxed">
-                Whether you're an individual investor or a business, MINT provides the infrastructure for seamless wealth expansion. Reach out to our team today.
-            </p>
-        </section>
-
-        <section class="max-w-7xl mx-auto px-6 md:px-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                
-                <div class="lg:col-span-4 space-y-12">
-                    <div class="space-y-8">
-                        <div>
-                            <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-4">Location</h4>
-                            <p class="text-xl font-light">3 Gwen Ln, Sandown,<br>Sandton, 2031</p>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=3+Gwen+Ln+Sandown+Sandton+2196" 
-                               target="_blank" 
-                               class="inline-block mt-4 text-sm font-semibold text-[var(--mint-primary-purple)] hover:translate-x-1 transition-transform">
-                               Get Directions →
-                            </a>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-4">Inquiries</h4>
-                            <p class="text-xl font-light">info@mymint.co.za</p>
-                            <p class="text-xl font-light">+27 10 276 0531</p>
-                        </div>
-        
-                        <div>
-                            <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-4">Social</h4>
-                            <div class="flex gap-4 mt-2">
-                                <a href="https://www.instagram.com/mymint_africa/" target="_blank" class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[var(--mint-primary-purple)] hover:text-white hover:border-[var(--mint-primary-purple)] transition-all">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                                </a>
-                                <a href="https://www.linkedin.com/company/mint-platforms/" target="_blank" class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-[var(--mint-primary-purple)] hover:text-white hover:border-[var(--mint-primary-purple)] transition-all">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="p-8 bg-black rounded-[2rem] text-white mt-12">
-                        <h4 class="text-[10px] font-bold text-[var(--mint-secondary)] uppercase tracking-[0.3em] mb-4">Institutional</h4>
-                        <p class="text-sm font-light text-gray-400 mb-6 leading-relaxed">For SME capital solutions, family offices, or institutional mandates, please request a Consultation Architecture directly.</p>
-                        <a href="mailto:info@mymint.co.za" class="text-sm font-bold border-b border-[var(--mint-secondary)] pb-1 hover:text-[var(--mint-secondary)] transition-colors">Contact Business Team →</a>
-                    </div>
-                </div>
-        
-                <div class="lg:col-span-8 h-[400px] lg:h-auto min-h-[400px] rounded-[2rem] overflow-hidden shadow-xl border border-gray-100 relative group">
-                    <div class="absolute inset-0 bg-[var(--mint-primary-purple)]/5 pointer-events-none group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-                    
-                    <iframe loading="lazy" 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581.9324546875935!2d28.05596487625121!3d-26.10103515978931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95733f38942b1f%3A0xc39f829ec9481358!2s3%20Gwen%20Ln%2C%20Sandown%2C%20Sandton%2C%202031!5e0!3m2!1sen!2sza!4v1708726000000!5m2!1sen!2sza" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade"
-                        class="grayscale hover:grayscale-0 transition-all duration-700">
-                    </iframe>
-                </div>
-                
-            </div>
-        </section>
-
-        <section class="max-w-4xl mx-auto px-6 md:px-10 mt-40">
-            <h2 class="text-4xl font-light tracking-tight text-center mb-16 uppercase">Common <span class="italic font-serif">Infrastructure</span> Questions</h2>
-            <div class="space-y-4">
-                <div class="faq-item group border-b border-gray-100 pb-6">
-                    <button class="flex items-center justify-between w-full text-left py-4">
-                        <span class="text-lg md:text-xl font-light group-hover:text-[var(--mint-primary-purple)] transition-colors">How do I start investing with MINT?</span>
-                        <svg class="w-5 h-5 text-gray-300 transition-transform group-focus:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-                    </button>
-                    <div class="hidden text-gray-500 font-light leading-relaxed">
-                        Simply go to our platform via the "Go to Mint" button, register your account, and complete our digital KYC process. Once verified, you can choose from our curated OpenStrategies.
-                    </div>
-                </div>
-                <div class="faq-item group border-b border-gray-100 pb-6">
-                    <button class="flex items-center justify-between w-full text-left py-4">
-                        <span class="text-lg md:text-xl font-light group-hover:text-[var(--mint-primary-purple)] transition-colors">Is MINT regulated?</span>
-                        <svg class="w-5 h-5 text-gray-300 transition-transform group-focus:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-                    </button>
-                    <div class="hidden text-gray-500 font-light leading-relaxed">
-                        Yes, MINT is an authorised Financial Services Provider (FSP 55118) and a registered Credit Provider (NCRCP22892).
-                    </div>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <div id="mobile-only-toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] pointer-events-none opacity-0 transition-all duration-500 transform translate-y-10">
-        <div class="bg-white/95 backdrop-blur-md border border-[var(--mint-primary-purple)]/20 shadow-2xl rounded-2xl px-6 py-5 flex flex-col items-center text-center gap-3 max-w-[320px] sm:max-w-[360px]">
-            <div class="w-12 h-12 rounded-full bg-[var(--mint-primary-purple)] flex items-center justify-center text-white shrink-0">
-                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                </svg>
-            </div>
-            <div class="space-y-1">
-                <h5 class="text-[var(--mint-primary-purple)] font-bold text-sm uppercase tracking-wider">Open on mobile</h5>
-                <p class="text-gray-700 text-sm font-medium">Switch to your phone to continue.</p>
-                <p class="text-gray-600 text-xs">Scan the code below to open the app.</p>
-            </div>
-            <img loading="lazy" src="/images/MINTSITE.png" alt="MINT app QR code" class="w-full h-auto object-contain rounded-xl border border-gray-200 bg-white p-2 shadow-sm">
         </div>
-    </div>
+    </section>
 
+    <!-- Trust Rail -->
+    <section class="border-y border-cream/20 bg-white/5 text-cream">
+        <div id="trustRail" class="mx-auto grid max-w-[1440px] grid-cols-2 gap-0 px-6 py-8 md:grid-cols-5 md:px-12">
+            <div class="flex flex-col justify-center gap-2 px-6 py-4 opacity-0 border-r border-cream/15">
+                <div class="flex items-center gap-2">
+                    <span class="font-serif text-[22px] italic text-cream">Financial Mail</span>
+                </div>
+                <div class="font-mono text-[11px] text-cream/60">"The clearest credit surface in the market."</div>
+            </div>
+            
+            <div class="flex flex-col justify-center gap-2 px-6 py-4 opacity-0 border-r border-cream/15">
+                <div class="flex items-center gap-2">
+                    <span class="font-serif text-xl italic text-cream">◈</span>
+                    <span class="font-serif text-[22px] italic text-cream">FSCA</span>
+                </div>
+                <div class="font-mono text-[11px] text-cream/60">Fully regulated & audited.</div>
+            </div>
+
+            <div class="flex flex-col justify-center gap-2 px-6 py-4 opacity-0 border-r border-cream/15">
+                <div class="flex items-center gap-2">
+                    <span class="font-serif text-xl italic text-brass">★</span>
+                    <span class="font-serif text-[22px] italic text-cream">#1 Most Loved</span>
+                </div>
+                <div class="font-mono text-[11px] text-cream/60">Wealth & Credit App™ 2026</div>
+            </div>
+
+            <div class="flex flex-col justify-center gap-2 px-6 py-4 opacity-0 border-r border-cream/15">
+                <div class="flex items-center gap-2">
+                    <span class="font-serif text-[22px] italic text-cream">NerdWallet</span>
+                </div>
+                <div class="font-mono text-[11px] text-cream/60">Best Overall Credit Marketplace, 2026</div>
+            </div>
+
+            <div class="flex flex-col justify-center gap-2 px-6 py-4 opacity-0">
+                <div class="flex items-center gap-2">
+                    <span class="font-serif text-[22px] italic text-cream">1M+</span>
+                </div>
+                <div class="font-mono text-[11px] text-cream/60">5-star reviews and counting</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="relative bg-oxblood px-6 py-32 md:px-12">
+        <div class="mx-auto max-w-[1440px]">
+            <div class="grid gap-8 border-b border-cream/15 pb-6 md:grid-cols-12">
+                <div class="md:col-span-3"><span class="eyebrow text-acid">How it works</span></div>
+                <div class="md:col-span-9"><span class="eyebrow text-cream/60">Three steps. No paperwork.</span></div>
+            </div>
+            <div class="mt-16 grid gap-8 md:grid-cols-3">
+                <div class="border-t border-cream/25 pt-8">
+                    <div class="font-serif text-[80px] italic leading-none text-brass">01</div>
+                    <h3 class="mag-h3 mt-8 font-serif text-cream">Connect your portfolio</h3>
+                    <p class="body-lg mt-6">Link the assets you already hold with MINT — equities, ETFs, MINT Baskets. Nothing sells.</p>
+                </div>
+                <div class="border-t border-cream/25 pt-8">
+                    <div class="font-serif text-[80px] italic leading-none text-brass">02</div>
+                    <h3 class="mag-h3 mt-8 font-serif text-cream">See your credit limit</h3>
+                    <p class="body-lg mt-6">In under a minute, we surface every lending option, ranked by rate and speed. No credit check.</p>
+                </div>
+                <div class="border-t border-cream/25 pt-8">
+                    <div class="font-serif text-[80px] italic leading-none text-brass">03</div>
+                    <h3 class="mag-h3 mt-8 font-serif text-cream">Draw. Repay. Repeat.</h3>
+                    <p class="body-lg mt-6">Approve and settle in minutes. Repay flexibly. Your portfolio stays invested the whole time.</p>
+                </div>
+            </div>
+            
+            <div class="mt-24 relative overflow-hidden bg-secondary rounded-xl" style="aspect-ratio: 21/9;">
+                <img src="/images/Mint Background.avif" alt="MINT background" loading="lazy" class="w-full h-full object-cover opacity-80" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketplace -->
+    <section class="relative bg-oxblood px-6 py-32 md:px-12">
+        <div class="mx-auto max-w-[1440px]">
+            <div class="grid gap-8 border-b border-cream/15 pb-6 md:grid-cols-12">
+                <div class="md:col-span-3"><span class="eyebrow text-acid">Marketplace</span></div>
+                <div class="md:col-span-9"><span class="eyebrow text-cream/60">Every lender · One table · Live rates</span></div>
+            </div>
+            <div class="mt-16 border border-cream/15 overflow-x-auto">
+                <div class="min-w-[800px]">
+                    <div class="font-mono grid grid-cols-5 border-b border-cream/15 bg-secondary px-6 py-4 text-[10px] uppercase tracking-widest text-cream/60">
+                        <span>Lender</span><span>Est. Rate</span><span>Limit</span><span>MINT Score</span><span class="text-right">Action</span>
+                    </div>
+                    
+                    <!-- Rows -->
+                    <div class="grid grid-cols-5 items-center border-b border-cream/10 px-6 py-6 transition-colors hover:bg-secondary">
+                        <span class="font-serif text-2xl italic text-cream">Standard Bank</span>
+                        <span class="font-mono text-cream">11.5%</span>
+                        <span class="font-mono text-cream">R 450,000</span>
+                        <div class="flex items-center gap-3">
+                            <div class="h-1 w-24 bg-cream/15">
+                                <div class="h-full bg-acid" style="width: 93%;"></div>
+                            </div>
+                            <span class="font-mono text-[11px] text-cream">93</span>
+                        </div>
+                        <div class="text-right">
+                            <button class="group inline-flex items-center gap-2 border-b border-cream pb-1">
+                                <span class="eyebrow">Select</span>
+                                <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-5 items-center border-b border-cream/10 px-6 py-6 transition-colors hover:bg-secondary">
+                        <span class="font-serif text-2xl italic text-cream">FNB Private</span>
+                        <span class="font-mono text-cream">11.8%</span>
+                        <span class="font-mono text-cream">R 420,000</span>
+                        <div class="flex items-center gap-3">
+                            <div class="h-1 w-24 bg-cream/15">
+                                <div class="h-full bg-acid" style="width: 91%;"></div>
+                            </div>
+                            <span class="font-mono text-[11px] text-cream">91</span>
+                        </div>
+                        <div class="text-right">
+                            <button class="group inline-flex items-center gap-2 border-b border-cream pb-1">
+                                <span class="eyebrow">Select</span>
+                                <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-5 items-center border-b border-cream/10 px-6 py-6 transition-colors hover:bg-secondary">
+                        <span class="font-serif text-2xl italic text-cream">Investec</span>
+                        <span class="font-mono text-cream">12.1%</span>
+                        <span class="font-mono text-cream">R 500,000</span>
+                        <div class="flex items-center gap-3">
+                            <div class="h-1 w-24 bg-cream/15">
+                                <div class="h-full bg-acid" style="width: 88%;"></div>
+                            </div>
+                            <span class="font-mono text-[11px] text-cream">88</span>
+                        </div>
+                        <div class="text-right">
+                            <button class="group inline-flex items-center gap-2 border-b border-cream pb-1">
+                                <span class="eyebrow">Select</span>
+                                <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-5 items-center border-b border-cream/10 px-6 py-6 transition-colors hover:bg-secondary">
+                        <span class="font-serif text-2xl italic text-cream">Nedbank</span>
+                        <span class="font-mono text-cream">12.4%</span>
+                        <span class="font-mono text-cream">R 380,000</span>
+                        <div class="flex items-center gap-3">
+                            <div class="h-1 w-24 bg-cream/15">
+                                <div class="h-full bg-acid" style="width: 85%;"></div>
+                            </div>
+                            <span class="font-mono text-[11px] text-cream">85</span>
+                        </div>
+                        <div class="text-right">
+                            <button class="group inline-flex items-center gap-2 border-b border-cream pb-1">
+                                <span class="eyebrow">Select</span>
+                                <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- MINT Direct - Highlighted -->
+                    <div class="grid grid-cols-5 items-center border-b border-cream/10 px-6 py-6 transition-colors hover:bg-secondary" style="background: color-mix(in oklab, var(--acid) 8%, transparent);">
+                        <span class="font-serif text-2xl italic text-cream">
+                            MINT Direct
+                            <span class="font-mono ml-3 text-[10px] uppercase tracking-widest text-acid">&◆ Best</span>
+                        </span>
+                        <span class="font-mono text-cream">10.9%</span>
+                        <span class="font-mono text-cream">R 250,000</span>
+                        <div class="flex items-center gap-3">
+                            <div class="h-1 w-24 bg-cream/15">
+                                <div class="h-full bg-acid" style="width: 96%;"></div>
+                            </div>
+                            <span class="font-mono text-[11px] text-cream">96</span>
+                        </div>
+                        <div class="text-right">
+                            <button class="group inline-flex items-center gap-2 border-b border-cream pb-1">
+                                <span class="eyebrow">Select</span>
+                                <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="font-mono mt-6 text-[11px] text-cream/40">
+                Rates are indicative and subject to affordability assessment under the NCA. Final rates confirmed on application.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="bg-[#111827] text-white pt-24 pb-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-6 md:px-10">
             
@@ -648,121 +653,57 @@
         </div>
     </footer>
 
+    <!-- Animations Script -->
     <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        document.body.style.overflow = "hidden"; // Lock scroll immediately
-
-        window.addEventListener('load', () => {
-            const preloaderTl = gsap.timeline();
-        
-            preloaderTl.to(".logo-loader", { 
-                opacity: 1, 
-                duration: 0.8, 
-                ease: "power2.out" 
-            })
-            .to("#preloader-bar", { 
-                width: "100%", 
-                duration: 0.6, 
-                ease: "expo.inOut" 
-            }, "-=0.4")
-            .to("#preloader", {
-                opacity: 0,
-                display: "none",
-                duration: 0.8,
-                ease: "power4.inOut",
-                onComplete: () => {
-                    document.body.style.overflow = "auto"; 
-                }
-            });
-        });
-
-        // Header Transformation Logic
-        let lastScroll = window.scrollY;
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.scrollY;
-            const header = document.getElementById('main-header');
-            if (currentScroll > lastScroll && currentScroll > 100) { header.classList.add('header-hidden'); } 
-            else { header.classList.remove('header-hidden'); }
-            lastScroll = currentScroll;
-        });
-
-        
-        // Robust Mobile Menu Toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const headerElement = document.getElementById('main-header');
-        const hamIcon = document.getElementById('hamburger-icon');
-        const closeIcon = document.getElementById('close-icon');
-
-        if(menuBtn && mobileMenu) {
-            menuBtn.addEventListener('click', () => {
-                const isOpen = mobileMenu.classList.contains('flex');
-                
-                // Toggle classes
-                mobileMenu.classList.toggle('hidden');
-                mobileMenu.classList.toggle('flex');
-                headerElement.classList.toggle('menu-open');
-                
-                // Toggle icons
-                hamIcon.classList.toggle('hidden');
-                closeIcon.classList.toggle('hidden');
-
-                // Toggle body scroll
-                if (!isOpen) {
-                    document.body.style.overflow = 'hidden';
-                    gsap.from("#mobile-menu a", { y: 20, opacity: 0, stagger: 0.1, duration: 0.4 });
-                } else {
-                    document.body.style.overflow = 'auto';
-                }
-            });
-        }
-
-        // Close menu on link click
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
-                headerElement.classList.remove('menu-open');
-                hamIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            });
-        });
-
-        // FAQ Logic
-        document.querySelectorAll('.faq-item button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const content = btn.nextElementSibling;
-                content.classList.toggle('hidden');
-            });
-        });
-
-        // Entrance Animations
-        gsap.from("h1, main p", {
-            y: 30, opacity: 0, duration: 1.2, stagger: 0.2, ease: "power3.out"
-        });
-
-        gsap.from(".glass-form", {
-            scale: 0.95, opacity: 0, duration: 1.5, ease: "power4.out", delay: 0.5
-        });
-        
-        function checkDevice() {
-
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-                            || window.innerWidth <= 1024;
-        
-            if (isMobile) {
-                window.location.href = "https://app.mymint.co.za/";
-            } else {
-                const toast = document.getElementById('mobile-only-toast');
-                toast.classList.add('show');
-
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 4000);
+        document.addEventListener("DOMContentLoaded", () => {
+            // Intersection Observer for Trust Rail
+            const trustRail = document.getElementById("trustRail");
+            if (trustRail) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const items = trustRail.children;
+                            Array.from(items).forEach((item, index) => {
+                                item.style.animation = `rise 800ms cubic-bezier(0.32,0.72,0,1) ${index * 80}ms forwards`;
+                            });
+                            observer.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                observer.observe(trustRail);
             }
-        }
+
+            // Intersection Observer for Phone Mockup Counter
+            const phoneMockup = document.getElementById("phoneMockup");
+            const counterValue = document.getElementById("counterValue");
+            const phoneLoader = document.getElementById("phoneLoader");
+            let started = false;
+
+            if (phoneMockup && counterValue && phoneLoader) {
+                const phoneObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !started) {
+                            started = true;
+                            let n = 0;
+                            const t = setInterval(() => {
+                                n += 1;
+                                counterValue.innerText = n;
+                                if (n >= 14) {
+                                    clearInterval(t);
+                                    setTimeout(() => {
+                                        phoneLoader.style.opacity = '0';
+                                        phoneLoader.style.filter = 'blur(12px)';
+                                        phoneLoader.style.pointerEvents = 'none';
+                                    }, 500);
+                                }
+                            }, 90);
+                            phoneObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                phoneObserver.observe(phoneMockup);
+            }
+        });
     </script>
 </body>
 </html>
