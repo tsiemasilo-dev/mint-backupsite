@@ -303,18 +303,17 @@
         }
     </style>
     <div id="video-preloader">
-        <video id="preloader-video" src="/videos/splash.mp4" autoplay muted playsinline></video>
+        <div id="splash-root" style="width: 100%; height: 100%;"></div>
     </div>
     <script>
         window.preloaderFinished = false;
         
         const preloader = document.getElementById('video-preloader');
-        const video = document.getElementById('preloader-video');
         
         let isPageLoaded = document.readyState === 'complete';
         let isVideoEnded = false;
         
-        function tryHidePreloader() {
+        window.tryHidePreloader = function() {
             if (isPageLoaded && isVideoEnded && !window.preloaderFinished) {
                 if (preloader) preloader.style.opacity = '0';
                 setTimeout(() => {
@@ -326,30 +325,30 @@
             }
         }
 
-        if (video) {
-            video.addEventListener('ended', () => {
-                isVideoEnded = true;
-                tryHidePreloader();
-            });
-            // Failsafe in case video can't load/play
-            setTimeout(() => {
-                isVideoEnded = true;
-                tryHidePreloader();
-            }, 8000);
-        } else {
+        window.completeSplash = function() {
             isVideoEnded = true;
-        }
+            window.tryHidePreloader();
+        };
+
+        // Failsafe in case React fails
+        setTimeout(() => {
+            window.completeSplash();
+        }, 8000);
 
         window.addEventListener('load', () => {
             isPageLoaded = true;
-            tryHidePreloader();
+            window.tryHidePreloader();
         });
         
         if (!isPageLoaded) {
             document.body.style.overflow = "hidden";
         } else {
-            tryHidePreloader();
+            window.tryHidePreloader();
         }
+    </script>
+    <script type="module">
+        import { mountSplash } from '/src/components/splash/mountSplash.jsx';
+        mountSplash(document.getElementById('splash-root'), window.completeSplash);
     </script>
 
         
