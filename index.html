@@ -322,6 +322,55 @@
             transform: translate(0, 0);
         }
 
+        .hero-cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            gap: 0.75rem;
+        }
+
+        .hero-cta-btn {
+            min-height: 3.25rem;
+            margin: 0;
+            background: transparent !important;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+
+        .hero-cta-btn > span {
+            color: #ffffff !important;
+        }
+
+        .hero-cta-btn .mint-cta-icon {
+            background-color: transparent;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+        }
+
+        .hero-cta-btn:hover {
+            background: transparent !important;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9);
+            border-color: #ffffff;
+        }
+
+        .hero-cta-btn:hover > span {
+            color: #ffffff !important;
+        }
+
+        .hero-cta-btn:hover .mint-cta-icon {
+            background-color: transparent;
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .hero-cta-btn .store-badge {
+            width: 1.25rem;
+            height: 1.25rem;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
         /* --- HERO STYLES --- */
         #pinContainer {
             width: 100%;
@@ -376,12 +425,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)), url('/images/HERO2.0.avif');
+            background-image: url('/images/HERO2.0.avif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             z-index: 10;
             will-change: transform;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(11, 15, 26, 0.52) 0%, rgba(11, 15, 26, 0.28) 42%, rgba(11, 15, 26, 0.40) 100%);
+            z-index: 15;
+            pointer-events: none;
         }
 
         /* --- LAPTOP & SHORT VIEWPORT OPTIMIZATIONS (ThinkPad & Windows laptops) --- */
@@ -885,6 +942,7 @@
 
         <div class="hero-bg-image">
         </div>
+        <div class="hero-overlay"></div>
         <div class="hero-initial w-full z-20">
             <div class="max-w-7xl mx-auto px-6 md:px-10">
                 <div class="max-w-2xl w-full">
@@ -896,8 +954,16 @@
                         Finally, one platform to invest, borrow, and protect.
                     </p>
 
-                    <button onclick="checkDevice()" class="mint-cta-btn group inline-flex mb-8">
-                        <span class="text-sm font-semibold text-[var(--mint-primary-purple)]">Sign Up/Sign In</span>
+                    <div class="text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase text-white/80 mb-4">
+                        Sign-Up/Sign-In
+                    </div>
+
+                    <div class="hero-cta-group mb-8">
+                    <button onclick="checkDevice()" class="mint-cta-btn hero-cta-btn group inline-flex">
+                        <span class="text-sm font-semibold text-[var(--mint-primary-purple)] flex items-center gap-2">
+                            <img src="/images/Browser icon.png" alt="" class="store-badge">
+                            Browser
+                        </span>
                         <div class="mint-cta-icon">
                             <svg class="transition-transform duration-300" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2.5">
@@ -912,9 +978,9 @@
                     </button>
 
                     <a href="https://apps.apple.com/app/mymint/id6802622668" onclick="handleAppleStoreClick(event)"
-                        class="mint-cta-btn group inline-flex mb-8 ml-0 md:ml-3">
+                        class="mint-cta-btn hero-cta-btn group inline-flex">
                         <span class="text-sm font-semibold text-[var(--mint-primary-purple)] flex items-center gap-2">
-                            <img src="/images/apple-logo.png" alt="" class="w-5 h-5 object-contain">
+                            <img src="/images/apple-logo.png" alt="" class="store-badge">
                             Apple Store
                         </span>
                         <div class="mint-cta-icon">
@@ -929,6 +995,26 @@
                             </svg>
                         </div>
                     </a>
+
+                    <a href="https://play.google.com/store/apps/details?id=app.mymint.co.za"
+                        class="mint-cta-btn hero-cta-btn group inline-flex" aria-label="Get myMINT on Google Play">
+                        <span class="text-sm font-semibold text-[var(--mint-primary-purple)] flex items-center gap-2">
+                            <img src="/images/Google playstore button-8.png" alt="" class="store-badge">
+                            Google Play
+                        </span>
+                        <div class="mint-cta-icon">
+                            <svg class="transition-transform duration-300" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M7 17l10-10M7 7h10v10" />
+                            </svg>
+                            <svg class="absolute -translate-x-8 translate-y-8 transition-transform duration-300"
+                                width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M7 17l10-10M7 7h10v10" />
+                            </svg>
+                        </div>
+                    </a>
+                    </div>
 
                 </div>
 
