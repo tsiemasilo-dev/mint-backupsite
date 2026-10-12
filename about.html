@@ -359,29 +359,6 @@
                     </div>
                     <div class="architect-row flex flex-col lg:flex-row items-center gap-10 md:gap-24" x-data="{ expanded: false }">
                         <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
-                            <img src="/images/EletuS.avif" alt="Eletu Silo" loading="lazy" class="director-portrait w-full h-full object-cover">
-                        </div>
-                        <div class="w-full lg:w-3/5">
-                            <h3 class="text-3xl md:text-5xl font-light mb-2">Eletu Silo, CA(SA)</h3>
-                            <p class="text-xs font-bold text-[var(--mint-primary-purple)] uppercase tracking-widest mb-6 md:mb-8">CFO</p>
-                            
-                            <div class="text-base md:text-lg text-gray-500 font-light leading-relaxed max-w-xl">
-                                <p>Eletu Silo is a Chartered Accountant (CA(SA)) with a strong foundation in external audit, financial reporting, and corporate governance. He brings a wealth of professional experience gained through his tenure in the auditing profession, most recently serving as an Audit Manager at EY.</p>
-                                
-                                <div x-show="expanded" x-cloak>
-                                    <p class="mt-4">In this role, Eletu was responsible for managing multiple audit portfolios across a diverse range of industries, including automotive, manufacturing, and financial services. His experience has equipped him with a deep understanding of complex business environments, regulatory requirements, and the practical application of financial reporting standards. He has successfully led audit teams, engaged with senior stakeholders, and ensured the delivery of high-quality, compliant audit outcomes.</p>
-                                </div>
-
-                                <button 
-                                    @click="expanded = !expanded" 
-                                    class="mt-4 text-[var(--mint-primary-purple)] font-medium underline underline-offset-4 hover:opacity-75 transition-opacity"
-                                    x-text="expanded ? 'Read less' : 'Read more'">
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="architect-row flex flex-col lg:flex-row items-center gap-10 md:gap-24" x-data="{ expanded: false }">
-                        <div class="relative w-full md:w-2/3 lg:w-2/5 aspect-square overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#f8f9fc] after:to-transparent after:via-transparent after:from-0% after:to-40%">
                             <img src="/images/JuanSite.avif" alt="Juan Site" loading="lazy" class="director-portrait w-full h-full object-cover">
                         </div>
                         <div class="w-full lg:w-3/5">
@@ -458,18 +435,6 @@
                             <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Markets</p>
                             <p class="hidden-bio text-gray-300 text-[11px] md:text-xs font-light leading-relaxed opacity-0 max-h-0 overflow-hidden transition-all duration-500">
                                 Head of Equity Trading at Absa. A Harvard Fellow and fintech co-founder with nearly two decades of experience spanning investment banking and global equity markets.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Card 5: Siliziwe Mafika -->
-                    <div class="step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl" onclick="updateCarousel(4)">
-                        <img src="/images/SliNEW.avif" alt="Siliziwe Mafika" class="absolute inset-0 w-full h-full object-cover rounded-[2rem] transition-all duration-700 z-0">
-                        <div class="absolute top-[15rem] md:top-auto md:bottom-4 left-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl p-5 transform transition-all duration-500 flex flex-col">
-                            <h4 class="text-white font-medium text-lg md:text-xl leading-tight mb-1">Siliziwe Mafika</h4>
-                            <p class="text-[var(--mint-secondary)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Banking | CA(SA)</p>
-                            <p class="hidden-bio text-gray-300 text-[11px] md:text-xs font-light leading-relaxed opacity-0 max-h-0 overflow-hidden transition-all duration-500">
-                                Partner at Deloitte and recognized leader in Financial Services. Specializes in Pan-African banking strategy and large-scale digital transformation.
                             </p>
                         </div>
                     </div>
@@ -688,8 +653,8 @@
             const totalCards = cards.length;
             
             cards.forEach((card, index) => {
-                // Reset to base classes - ensuring overflow-hidden is NOT added back here
-                card.className = 'step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl';
+                // Reset to base classes: keep only the 3 visible cards in the viewport
+                card.className = 'step-card absolute w-[16rem] h-[22rem] md:w-[22rem] md:h-[30rem] rounded-[2rem] transition-all duration-700 ease-out cursor-pointer bg-gray-100 shadow-xl opacity-0 pointer-events-none';
                 
                 const img = card.querySelector('img');
                 const bio = card.querySelector('.hidden-bio');
@@ -701,35 +666,46 @@
                 } else if (diff < -Math.floor(totalCards / 2)) {
                     diff += totalCards;
                 }
-                
-                if (diff === 0) {
-                    // Center Card (Active)
-                    card.classList.add('z-30', 'scale-100', 'opacity-100', 'translate-x-0', 'shadow-2xl');
-                    img.classList.remove('grayscale');
-                    if(bio) {
-                        bio.classList.remove('opacity-0', 'max-h-0');
-                        bio.classList.add('opacity-100', 'max-h-40', 'mt-3');
+
+                if (Math.abs(diff) > 1) {
+                    // Keep the hidden cards directly behind the front card rather than far out of frame
+                    if (diff < 0) {
+                        card.classList.add('z-10', '-translate-x-[18%]', 'md:-translate-x-[20%]');
+                    } else {
+                        card.classList.add('z-10', 'translate-x-[18%]', 'md:translate-x-[20%]');
                     }
-                } else {
-                    // Non-center cards
                     img.classList.add('grayscale');
-                    if(bio) {
+                    if (bio) {
                         bio.classList.add('opacity-0', 'max-h-0');
                         bio.classList.remove('opacity-100', 'max-h-40', 'mt-3');
                     }
-                    
+                    return;
+                }
+
+                card.classList.remove('pointer-events-none', 'opacity-0');
+                card.classList.add('pointer-events-auto', 'opacity-100');
+                img.classList.remove('grayscale');
+
+                if (diff === 0) {
+                    // Center Card (Active) - keep its body visible
+                    card.classList.add('z-30', 'scale-100', 'translate-x-0', 'shadow-2xl');
+                    if (bio) {
+                        bio.classList.remove('opacity-0', 'max-h-0', 'overflow-hidden');
+                        bio.classList.add('opacity-100', 'max-h-40', 'mt-3');
+                    }
+                } else {
+                    // Side cards stay collapsed
+                    if (bio) {
+                        bio.classList.add('opacity-0', 'max-h-0', 'overflow-hidden');
+                        bio.classList.remove('opacity-100', 'max-h-40', 'mt-3');
+                    }
+
                     if (diff === -1) {
                         // Immediate Left
-                        card.classList.add('z-20', 'scale-[0.85]', 'opacity-80', '-translate-x-[50%]', 'md:-translate-x-[65%]');
+                        card.classList.add('z-20', 'scale-[0.85]', 'opacity-80', '-translate-x-[58%]', 'md:-translate-x-[68%]');
                     } else if (diff === 1) {
                         // Immediate Right
-                        card.classList.add('z-20', 'scale-[0.85]', 'opacity-80', 'translate-x-[50%]', 'md:translate-x-[65%]');
-                    } else if (diff < 0) {
-                        // Far Left
-                        card.classList.add('z-10', 'scale-[0.70]', 'opacity-40', '-translate-x-[90%]', 'md:-translate-x-[120%]');
-                    } else if (diff > 0) {
-                        // Far Right
-                        card.classList.add('z-10', 'scale-[0.70]', 'opacity-40', 'translate-x-[90%]', 'md:translate-x-[120%]');
+                        card.classList.add('z-20', 'scale-[0.85]', 'opacity-80', 'translate-x-[58%]', 'md:translate-x-[68%]');
                     }
                 }
             });
